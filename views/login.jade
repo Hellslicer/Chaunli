@@ -1,0 +1,19 @@
+extend layout
+block content
+    .container.content
+        .row
+            .col-lg-12
+                h1.page-header #{__("Connection")}
+        .row
+            .col-lg-12
+                form(role="form", action="/login", method="post")
+                    .form-group
+                        label(for="email")
+                            | #{__("Email")}
+                        input.form-control(id="email", name="email", type="email")
+                    .form-group
+                        label(for="password")
+                            | #{__("Password")}
+                        input.form-control(id="password", name="password", type="password")
+                    button.btn.btn-default(type="submit")
+                        | #{__("Sign in")}

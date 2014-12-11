@@ -1,0 +1,14 @@
+script#writing_single_template(type="text/html")
+	div.row.ma-no-h.pa-sm-v.pa-lg-h
+		p.col-md-11.col-xs-11.pa-no-h.col-lg-11.ma-no-v
+			i
+				b.pa-sm-h
+					| <%=name%>
+				|  <%=i18n.__("is writing a message ...")%>
+script#writing_multi_template(type="text/html")
+	div.row.ma-no-h.pa-sm-v.pa-lg-h
+		p.col-md-11.col-xs-11.pa-no-h.col-lg-11.ma-no-v
+			i
+				b.pa-sm-h
+					| <%=names%>
+				|  <%=i18n.__("are writing a message ...")%>

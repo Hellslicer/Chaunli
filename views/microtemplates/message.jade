@@ -1,0 +1,8 @@
+script#message_template(type="text/html")
+	.row.ma-no-h.pa-sm-v.pa-lg-h
+		.col-md-11.col-xs-11.pa-no-h.col-lg-11.ma-no-v.text
+			b.pa-sm-h
+				| <%=name%>
+			|  <%=message%>
+		span.date.col-md-1.col-xs-1.pa-no-h.col-lg-1.pa-xs-v.text-right(data-livestamp!="<%=date%>", data-toggle="tooltip", data-placement="top", title!="<%=formated_date%>")
+			| <%=date%>

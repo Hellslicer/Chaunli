@@ -1,0 +1,28 @@
+extend layout
+block imports
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css")
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/emojify.js/0.9.5/emojify.min.css")
+    script(src="//code.jquery.com/jquery-2.1.1.min.js")
+    script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment-with-locales.min.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/emojify.js/0.9.5/emojify.min.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="/javascripts/microtemplate.js")
+    script(src="/javascripts/idle-timer.min.js")
+    script(src="/javascripts/sprintf.min.js")
+    script(src="/javascripts/i18n.js")
+    script(src="/javascripts/main.js")
+    include ./microtemplates.jade
+block content
+    .container.content
+        .row
+            .col-lg-12.col-md-12.col-xs-12.ma-lg-v
+                h1.col-lg-2.col-md-2.col-xs-12.ma-lg-v.pa-no-h Chaunli
+                div.col-lg-10.col-md-10.col-xs-12.pa-no-h.ma-lg-v.pa-lg-h
+                    ul.list-inline.ma-sm-v.text-right.pa-lg-h
+        .row
+            div(role="tabpanel")
+                div.col-lg-12.col-md-12.col-xs-12
+                    ul#rooms.nav.nav-tabs(role="tablist")
+                div.tab-content

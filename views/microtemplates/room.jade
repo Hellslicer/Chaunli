@@ -1,0 +1,16 @@
+script#room_tab_template(type="text/html")
+	li(role!="<%=id%>", class!="<% if (active) { %>active<% } %>")
+		a(href!="#<%=id%>",aria-controls!="<%=id%>",role="tab",data-toggle="tab")
+			| <%=name%>
+
+script#room_template(type="text/html")
+	div.tab-pane(id!="<%=id%>", role="tabpanel", class!="<% if (active) { %>active<% } %>")
+		div.col-lg-12.col-md-12.col-xs-12
+			#messages
+			#writing
+		div.col-lg-12.col-md-12.col-xs-12.ma-lg-v
+			div.col-lg-10.col-md-10.col-xs-8.pa-no-h
+				textarea#message.form-control(rows="2", placeholder="Entrer un message ici")
+			input#send.btn.btn-primary.btn-lg.col-lg-2.col-md-2.col-xs-4.pa-no-h(type="button", value="Envoyer")
+		div.col-lg-12.col-md-12.col-xs-12
+			p
