@@ -23,6 +23,10 @@ Change configuration in /config
 $ npm start
 ```
 
+Default users are:
+- admin@localhost / admin
+- user@localhost / user
+
 ## Features
 
 * Realtime
