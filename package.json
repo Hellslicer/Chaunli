@@ -1,6 +1,6 @@
 {
   "name": "chaunli",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Webchat",
   "author": "Kévin Poirot",
   "main": "index.js",
