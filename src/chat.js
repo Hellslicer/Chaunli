@@ -3,8 +3,8 @@ var path = require("path")
     , md5 = require("MD5")
     , marked = require('marked')
     , highlight = require('highlight.js')
-    , Utils = require(path.resolve(__dirname, "./src/utils"))
-    , User = require(path.resolve(__dirname, "./src/user"));
+    , Utils = require(path.resolve(__dirname, "./utils"))
+    , User = require(path.resolve(__dirname, "./user"));
 
 var renderer = new marked.Renderer();
 renderer.paragraph = function(text) {
