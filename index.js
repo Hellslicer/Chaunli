@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+var path = require("path");
+process.env["NODE_CONFIG_DIR"] = path.resolve(__dirname, "./config");
+
 var express = require("express")
     , session = require('express-session')
     , config = require("config")
@@ -11,7 +14,6 @@ var express = require("express")
     , http = require("http")
     , server = http.createServer(app)
     , io = require("socket.io").listen(server)
-    , path = require("path")
     , md5 = require("MD5")
     , passport = require("passport")
     , LocalStrategy = require("passport-local").Strategy
@@ -19,10 +21,10 @@ var express = require("express")
     , bodyParser = require("body-parser")
     , cookieParser = require("cookie-parser")
     , i18n = require("i18n")
-    , User = require(path.resolve("./src/user"))
-    , chat = require(path.resolve("./src/chat"));
+    , User = require(path.resolve(__dirname, "./src/user"))
+    , chat = require(path.resolve(__dirname, "./src/chat"));
 
-app.set("views", path.resolve("./views"));
+app.set("views", path.resolve(__dirname, "./views"));
 app.set("view engine", "jade");
 app.use(express.static(path.join(app.get("views"))));
 app.use(bodyParser.json());
@@ -39,11 +41,11 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/locales", express.static(path.resolve("./locales")));
+app.use("/locales", express.static(path.resolve(__dirname, "./locales")));
 app.use(i18n.init);
 i18n.configure({
     locales:["en", "fr"],
-    directory: path.resolve("./locales")
+    directory: path.resolve(__dirname, "./locales")
 });
 passport.use(new LocalStrategy({
         usernameField: "email",
@@ -93,9 +95,9 @@ function onAuthorizeFail(data, message, error, accept){
         accept(new Error(message));
 }
 
-var index = require(path.resolve("./routes/index"))
-    , login = require(path.resolve("./routes/login"))
-    , logout = require(path.resolve("./routes/logout"));
+var index = require(path.resolve(__dirname, "./routes/index"))
+    , login = require(path.resolve(__dirname, "./routes/login"))
+    , logout = require(path.resolve(__dirname, "./routes/logout"));
 
 app.all("/", index.show);
 app.all("/login", login.show);
