@@ -33,7 +33,7 @@
             for(var i = 0, length = rooms.length; i < length; i++) {
                 var roomName = i18n.__(rooms[i].name) || rooms[i].name;
                 tabs.append(tmpl("room_tab_template", { name: roomName, id: rooms[i].id, active: firstRoom }));
-                tabsContent.append(tmpl("room_template", { id: rooms[i].id, active: firstRoom }));
+                tabsContent.append(tmpl("room_template", { id: rooms[i].id, active: firstRoom, i18n: i18n }));
                 chat(rooms[i]);
                 if (firstRoom)
                     firstRoom = false;
