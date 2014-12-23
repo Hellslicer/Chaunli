@@ -40,5 +40,6 @@
     "path": "~0.4.9",
     "redis": "~0.12.1",
     "socket.io": "~1.2.0"
-  }
+  },
+  "preferGlobal": "true"
 }
