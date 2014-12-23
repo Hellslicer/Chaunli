@@ -38,6 +38,40 @@ Default users are:
 * Avatar via Gravatar
 * i18n
 
+## Configuration
+
+* server
+
+  * `host` - Host (ie. 127.0.0.1)
+  * `port` - Port (ie. 8210)
+
+* redis
+
+  * `host` - Host (ie. 127.0.0.1)
+  * `port` - Port (ie. 6379)
+  * `prefix` - Prefix used to store data (ie. chaunli)
+
+* secret_token
+
+  Secret token used by Chaunli
+
+* rooms
+
+  Array of available rooms
+
+* users
+
+  Array of users
+
+  * `id` - Unique identifier
+  * `username` - Username
+  * `alias` - Alias used for PM
+  * `password` - MD5 encoded password
+  * `email` - Email
+  * `roles` - Array of permissions
+    * `admin` - Administrator
+    * `user` - Basic user
+
 ## License
 
 (The MIT License)
