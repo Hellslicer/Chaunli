@@ -2,6 +2,8 @@ Chaunli
 =======
 [![NPM](https://nodei.co/npm/chaunli.png?downloads=true)](https://nodei.co/npm/chaunli/)
 
+[![Dependency Status](https://david-dm.org/hellslicer/chaunli.png)](https://david-dm.org/hellslicer/chaunli)
+
 Simple webchat in NodeJS.
 
 ## Requirements
