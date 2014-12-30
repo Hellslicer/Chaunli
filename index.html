@@ -36,6 +36,8 @@
 
 <p><a href="https://nodei.co/npm/chaunli/"><img src="https://nodei.co/npm/chaunli.png?downloads=true" alt="NPM"></a></p>
 
+<p><a href="https://david-dm.org/hellslicer/chaunli"><img src="https://david-dm.org/hellslicer/chaunli.png" alt="Dependency Status"></a></p>
+
 <p>Simple webchat in NodeJS.</p>
 
 <h2>
@@ -78,6 +80,72 @@ $ npm install
 <li>Markdown</li>
 <li>Avatar via Gravatar</li>
 <li>i18n</li>
+</ul>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<ul>
+<li>
+<p>server</p>
+
+<ul>
+<li>
+<code>host</code> - Host (ie. 127.0.0.1)</li>
+<li>
+<code>port</code> - Port (ie. 8210)</li>
+</ul>
+</li>
+<li>
+<p>redis</p>
+
+<ul>
+<li>
+<code>host</code> - Host (ie. 127.0.0.1)</li>
+<li>
+<code>port</code> - Port (ie. 6379)</li>
+<li>
+<code>prefix</code> - Prefix used to store data (ie. chaunli)</li>
+</ul>
+</li>
+<li>
+<p>secret_token</p>
+
+<p>Secret token used by Chaunli</p>
+</li>
+<li>
+<p>rooms</p>
+
+<p>Array of available rooms</p>
+</li>
+<li>
+<p>users</p>
+
+<p>Array of users</p>
+
+<ul>
+<li>
+<code>id</code> - Unique identifier</li>
+<li>
+<code>username</code> - Username</li>
+<li>
+<code>alias</code> - Alias used for PM</li>
+<li>
+<code>password</code> - MD5 encoded password</li>
+<li>
+<code>email</code> - Email</li>
+<li>
+<code>roles</code> - Array of permissions
+
+<ul>
+<li>
+<code>admin</code> - Administrator</li>
+<li>
+<code>user</code> - Basic user</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 <h2>
