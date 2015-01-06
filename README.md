@@ -78,4 +78,4 @@ Default users are:
 
 (The MIT License)
 
-Copyright (c) 2014 Kévin Poirot <hellslicer@minecorps.fr>. See [License](https://github.com/hellslicer/chaunli/blob/master/LICENSE) for details.
+Copyright (c) 2014-2015 Kévin Poirot <hellslicer@minecorps.fr>. See [License](https://github.com/hellslicer/chaunli/blob/master/LICENSE) for details.
