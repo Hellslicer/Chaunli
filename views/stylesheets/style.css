@@ -59,25 +59,25 @@ table tr:nth-child(2n) {
 }
 
 textarea {resize:vertical;}
-.ma-no-v {margin-top:0px;margin-bottom:0px;}    /* Margin None   Vertical   */
+.ma-no-v {margin-top:0;margin-bottom:0;}    /* Margin None   Vertical   */
 .ma-xs-v {margin-top:2px;margin-bottom:2px;}    /* Margin XSmall Vertical   */
 .ma-sm-v {margin-top:5px;margin-bottom:5px;}    /* Margin Small  Vertical   */
 .ma-md-v {margin-top:10px;margin-bottom:10px}   /* Margin Medium Vertical   */
 .ma-lg-v {margin-top:15px;margin-bottom:15px}   /* Margin Large  Vertical   */
 
-.ma-no-h {margin-right:0px;margin-left:0px;}    /* Margin None   Horizontal */
+.ma-no-h {margin-right:0;margin-left:0;}    /* Margin None   Horizontal */
 .ma-xs-h {margin-right:2px;margin-left:2px;}    /* Margin XSmall Horizontal */
 .ma-sm-h {margin-right:5px;margin-left:5px;}    /* Margin Small  Horizontal */
 .ma-md-h {margin-right:10px;margin-left:10px;}  /* Margin Medium Horizontal */
 .ma-lg-h {margin-right:15px;margin-left:15px;}  /* Margin Large  Horizontal */
 
-.pa-no-v {padding-top:0px;padding-bottom:0px;}    /* Padding None   Vertical   */
+.pa-no-v {padding-top:0;padding-bottom:0;}    /* Padding None   Vertical   */
 .pa-xs-v {padding-top:2px;padding-bottom:2px;}    /* Padding XSmall Vertical   */
 .pa-sm-v {padding-top:5px;padding-bottom:5px;}    /* Padding Small  Vertical   */
 .pa-md-v {padding-top:10px;padding-bottom:10px}   /* Padding Medium Vertical   */
 .pa-lg-v {padding-top:15px;padding-bottom:15px}   /* Padding Large  Vertical   */
 
-.pa-no-h {padding-right:0px;padding-left:0px;}    /* Padding None   Horizontal */
+.pa-no-h {padding-right:0;padding-left:0;}    /* Padding None   Horizontal */
 .pa-xs-h {padding-right:2px;padding-left:2px;}    /* Padding XSmall Horizontal */
 .pa-sm-h {padding-right:5px;padding-left:5px;}    /* Padding Small  Horizontal */
 .pa-md-h {padding-right:10px;padding-left:10px;}  /* Padding Medium Horizontal */

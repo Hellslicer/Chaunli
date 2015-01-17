@@ -18,11 +18,13 @@ I18n.prototype = {
     },
 
     setLocale: function(locale){
-        if(!locale)
+        if(!locale) {
             locale = $("html").attr("lang");
+        }
 
-        if(!locale)
+        if(!locale) {
             locale = this.defaultLocale;
+        }
 
         this.locale = locale;
 
@@ -32,7 +34,7 @@ I18n.prototype = {
 
     getLocaleFileFromServer: function(){
         var _this = this;
-        localeFile = null;
+        var localeFile = null;
 
         $.ajax({
             url: this.directory + "/" + this.locale + this.extension,
@@ -54,8 +56,9 @@ I18n.prototype = {
     __: function(){
         var msg = I18n.localeCache[this.locale][arguments[0]] || I18n.localeCache[this.defaultLocale][arguments[0]];
 
-        if (arguments.length > 1)
+        if (arguments.length > 1) {
             msg = vsprintf(msg, Array.prototype.slice.call(arguments, 1));
+        }
 
         return msg;
     },
@@ -64,15 +67,17 @@ I18n.prototype = {
         var msg = I18n.localeCache[this.locale][singular];
 
         count = parseInt(count, 10);
-        if(count === 0)
+        if(count === 0) {
             msg = msg.zero;
-        else
+        } else {
             msg = count > 1 ? msg.other : msg.one;
+        }
 
         msg = vsprintf(msg, [count]);
 
-        if (arguments.length > 2)
+        if (arguments.length > 2) {
             msg = vsprintf(msg, Array.prototype.slice.call(arguments, 2));
+        }
 
         return msg;
     }

@@ -14,11 +14,12 @@ exports.removeFromObject = function(object, property, value) {
 		return object;
 	}
 };
+
 exports.updateObject = function(objects, property, value, newProperties) {
 	try {
 		for (var i = 0, length = objects.length; i < length; i++) {
 			var object = objects[i];
-			if (object[property] == value) {
+			if (object[property] === value) {
 				Object.keys(newProperties).forEach(function(currentProperty) {
 					object[currentProperty] = newProperties[currentProperty];
 				});

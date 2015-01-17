@@ -1,7 +1,7 @@
 var passport = require("passport");
 
 exports.show = function(req, res, next) {
-    if (req.method == "GET") {
+    if (req.method === "GET") {
         if (req.isAuthenticated()) {
             res.redirect('/');
         }

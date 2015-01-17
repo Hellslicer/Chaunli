@@ -86,10 +86,11 @@ exports.respond = function(socket, endpoint, room, redis) {
     currentUser = {id: socket.request.user.id, name: socket.request.user.username, md5: md5(socket.request.user.email), roles: socket.request.user.roles};
 
     // Rooms
-    if (currentUser.roles.indexOf("admin") != -1)
+    if (currentUser.roles.indexOf("admin") !== -1) {
         socket.join("admins");
-    else
+    } else {
         socket.join("users");
+    }
     socket.join(currentUser.id); // User specific room for PM
 
     socket.broadcast.emit("message", {author: {name: "Server"}, date: new Date().toISOString(), msg: "%s just logged in", i18n: [socket.request.user.username]});
@@ -103,7 +104,7 @@ exports.respond = function(socket, endpoint, room, redis) {
     });
     socket.on("message", function(message, callback) {
         if (message.msg !== "") {
-            if (message.msg.substr(0, 1) == "/") {
+            if (message.msg.substr(0, 1) === "/") {
                 var command = message.msg.substr(1).split(" ")[0];
                 var response = {};
                 response.author = {name: req.__("Server")};
@@ -122,14 +123,14 @@ exports.respond = function(socket, endpoint, room, redis) {
                             response.msg =  req.__("Unknown user %s", recipient);
                             callback(response);
                             return;
-                        } else if (user.id == socket.request.user.id) {
+                        } else if (user.id === socket.request.user.id) {
                             response.msg = req.__("You can't send a PM to yourself");
                             callback(response);
                             return;
                         }
 
                         user = users.filter(function (item) {
-                            return (item.id == user.id);
+                            return (item.id === user.id);
                         });
                         if (user.length > 0) {
                             user = user[0];
@@ -148,7 +149,7 @@ exports.respond = function(socket, endpoint, room, redis) {
                     });
                     return;
                     case "reload":
-                        if (socket.request.user.roles.indexOf("admin") != -1) {
+                        if (socket.request.user.roles.indexOf("admin") !== -1) {
                             callback({msg: req.__("Reloading clients %s", "..."), author: { name: req.__("Server") }, date: response.date});
                             socket.broadcast.to("admins").emit("message", {author: {name: req.__("Server")}, date: response.date, msg: req.__("Reloading clients") + " (" + req.__("triggered by") + " " + socket.request.user.username + ") ..."});
                             socket.broadcast.to("users").emit("reload", {status: true});

@@ -35,8 +35,9 @@
                 tabs.append(tmpl("room_tab_template", { name: roomName, id: rooms[i].id, active: firstRoom }));
                 tabsContent.append(tmpl("room_template", { id: rooms[i].id, active: firstRoom, i18n: i18n }));
                 chat(rooms[i]);
-                if (firstRoom)
+                if (firstRoom) {
                     firstRoom = false;
+                }
             }
         });
 
@@ -57,21 +58,24 @@
                 if (notificationEnabled && !(!!message.init)) {
                     unreadMessages++;
                     document.title = "(" + unreadMessages + ") Chaunli";
-                    if (message.notif)
+                    if (message.notif) {
                         show(message.author, message.msg);
+                    }
                 }
             }).on("writing", function(data) {
                 var found = false;
                 usersWriting = $.grep(usersWriting, function(user, i) {
-                    if (user.name == data.user.name) {
+                    if (user.name === data.user.name) {
                         found = true;
-                        if (!(!!data.status))
+                        if (!(!!data.status)) {
                             return false;
+                        }
                     }
                     return true;
                 });
-                if (!found && !!data.status)
+                if (!found && !!data.status) {
                     usersWriting.push(data.user);
+                }
                 refreshWritingUser();
             }).on("reload", function(reload) {
                 if (!!reload.status) {
@@ -81,7 +85,7 @@
 
             var refreshWritingUser = function () {
                 writingList.html("");
-                if (usersWriting.length == 1) {
+                if (usersWriting.length === 1) {
                     for (var user in usersWriting) {
                         writingList.append(tmpl("writing_single_template", { name: usersWriting[user].name, i18n: i18n }));
                     }
@@ -111,7 +115,7 @@
 
             $("#" + room.id + " #send").bind("click", send);
             textarea.keydown(function (e) {
-                if ((e.keyCode == 10 || e.keyCode == 13)) {
+                if ((e.keyCode === 10 || e.keyCode === 13)) {
                     if (e.ctrlKey || e.shiftKey) {
                         e.preventDefault();
                         textarea.insertAtCaret("\r\n");
@@ -130,7 +134,7 @@
             $(window).on("blur focus", function(e) {
                 var prevType = $(this).data("prevType");
 
-                if (prevType != e.type) {   //  reduce double fire issues
+                if (prevType !== e.type) {   //  reduce double fire issues
                     switch (e.type) {
                         case "blur":
                             notificationEnabled = true;
@@ -149,13 +153,13 @@
 
         socket.on("userChanged", function(action) {
             var user = action.user;
-            if (action.type == "joined") {
+            if (action.type === "joined") {
                 loggedUsers.push(user);
                 refreshUserList();
-            } else if (action.type == "left") {
+            } else if (action.type === "left") {
                 loggedUsers = removeFromObject(loggedUsers, "id", user);
                 refreshUserList();
-            } else if (action.type == "idle") {
+            } else if (action.type === "idle") {
                 refreshUser(user, action.changed);
             }
         });
@@ -171,7 +175,7 @@
 
         var refreshUser = function (user, changed) {
             $.each(loggedUsers, function () {
-                if (this.id == user) {
+                if (this.id === user) {
                     var currentUser = this;
                     $.each(changed, function(key, value) {
                         currentUser[key] = value;
@@ -236,7 +240,7 @@
             return false;
         }
 
-        var write_timeout = null ;
+        var writeTimeout = null ;
         function callbackWithTimeOut(time, callback) {
             if (typeof callback !== "function") {
                 console.log("Callback must be a function") ;
@@ -245,10 +249,10 @@
             if (null == time) {
                 time = 500 ;
             }
-            if (null !== write_timeout) {
-                clearTimeout(write_timeout) ;
+            if (null !== writeTimeout) {
+                clearTimeout(writeTimeout) ;
             }
-            write_timeout = setTimeout(callback, time) ;
+            writeTimeout = setTimeout(callback, time) ;
         }
 
         function convertHtmlToText(html) {

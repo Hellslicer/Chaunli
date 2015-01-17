@@ -63,6 +63,7 @@ passport.use(new LocalStrategy({
         });
     }
 ));
+
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
@@ -72,14 +73,6 @@ passport.deserializeUser(function(id, done) {
         done(err, user);
     });
 });
-io.use(passportSocketIo.authorize({
-    cookieParser: cookieParser,
-    key:         "chaunli.sid",
-    secret:      config.get("secret_token"),
-    store:       sessionStore,
-    success:     onAuthorizeSuccess,
-    fail:        onAuthorizeFail
-}));
 
 function onAuthorizeSuccess(data, accept){
     i18n.init(data);
@@ -91,9 +84,21 @@ function onAuthorizeSuccess(data, accept){
 
 function onAuthorizeFail(data, message, error, accept){
     console.info(new Date().toLocaleString() + " Failed connection to socket.io: " + message);
-    if(error)
+    if(error) {
         accept(new Error(message));
+    }
 }
+
+io.use(passportSocketIo.authorize({
+    cookieParser: cookieParser,
+    key:         "chaunli.sid",
+    secret:      config.get("secret_token"),
+    store:       sessionStore,
+    success:     onAuthorizeSuccess,
+    fail:        onAuthorizeFail
+}));
+
+
 
 var index = require(path.resolve(__dirname, "./routes/index"))
     , login = require(path.resolve(__dirname, "./routes/login"))
@@ -128,7 +133,7 @@ server.listen(config.get("server.port"), config.get("server.host"), function() {
 
 process.on('message', function(msg) {
     // PM2 Graceful reload
-    if (msg == 'shutdown') {
+    if (msg === 'shutdown') {
         chat.close(io);
 
         setTimeout(function() {
