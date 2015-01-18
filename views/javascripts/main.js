@@ -87,7 +87,9 @@
                 writingList.html("");
                 if (usersWriting.length === 1) {
                     for (var user in usersWriting) {
-                        writingList.append(tmpl("writing_single_template", { name: usersWriting[user].name, i18n: i18n }));
+                        if (usersWriting.hasOwnProperty(user)) {
+                            writingList.append(tmpl("writing_single_template", { name: usersWriting[user].name, i18n: i18n }));
+                        }
                     }
                 } else if (usersWriting.length > 1) {
                     var users = usersWriting.map(function(user) {
@@ -189,8 +191,10 @@
             userList.html("");
             var idleClass;
             for (var user in loggedUsers) {
-                idleClass = !!loggedUsers[user].idle ? "idle" : "";
-                userList.append(tmpl("user_template", { idleClass: idleClass, name: loggedUsers[user].name, md5: loggedUsers[user].md5 }));
+                if (loggedUsers.hasOwnProperty(user)) {
+                    idleClass = !!loggedUsers[user].idle ? "idle" : "";
+                    userList.append(tmpl("user_template", { idleClass: idleClass, name: loggedUsers[user].name, md5: loggedUsers[user].md5 }));
+                }
             }
             $('[data-toggle="tooltip"]').tooltip();
         };

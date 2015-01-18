@@ -57,7 +57,7 @@ passport.use(new LocalStrategy({
             User.findOne(username, function(err, user) {
                 if (err) { return done(err); }
                 if (!user) { return done(null, false, { message: i18n.__("Unknown user %s", username) }); }
-                if (user.password != md5(password)) { return done(null, false, { message: i18n.__("Invalid password") }); }
+                if (user.password !== md5(password)) { return done(null, false, { message: i18n.__("Invalid password") }); }
                 return done(null, user);
             })
         });

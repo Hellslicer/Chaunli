@@ -111,7 +111,7 @@ exports.respond = function(socket, endpoint, room, redis) {
                 response.date = new Date().toISOString();
                 switch (command) {
                     case "about":
-                        response.msg = req.__("Chat powered by Chaunli %s", " v0.1.0");
+                        response.msg = req.__("Chat powered by Chaunli %s", " v0.1.6");
                         break;
                     case "help":
                         response.msg = req.__("Help is currently unavailable.");

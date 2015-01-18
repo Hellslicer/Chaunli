@@ -1,6 +1,8 @@
 var I18n = function(options){
     for (var prop in options) {
-        this[prop] = options[prop];
+        if (options.hasOwnProperty(prop)) {
+            this[prop] = options[prop];
+        }
     }
 
     this.setLocale(this.locale);
