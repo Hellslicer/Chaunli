@@ -2,7 +2,7 @@ Chaunli
 =======
 [![NPM](https://nodei.co/npm/chaunli.png?downloads=true)](https://nodei.co/npm/chaunli/)
 
-[![Dependency Status](https://david-dm.org/hellslicer/chaunli.png)](https://david-dm.org/hellslicer/chaunli)
+[![Dependency Status](https://david-dm.org/hellslicer/chaunli.png)](https://david-dm.org/hellslicer/chaunli)&nbsp;([marked VBScript Content Injection](https://nodesecurity.io/advisories/marked_vbscript_injection) Fixed)
 
 Simple webchat in NodeJS.
 
