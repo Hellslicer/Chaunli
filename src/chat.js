@@ -1,42 +1,44 @@
 var path = require("path")
     , config = require("config")
     , md5 = require("MD5")
-    , marked = require('marked')
     , highlight = require('highlight.js')
     , Utils = require(path.resolve(__dirname, "./utils"))
     , User = require(path.resolve(__dirname, "./user"));
 
-var renderer = new marked.Renderer();
-renderer.paragraph = function(text) {
-    return text;
-};
-renderer.link = function(href, title, text) {
-    if (this.options.sanitize) {
+var markdownIt = require('markdown-it')({
+    breaks: false,
+    langPrefix: "lang",
+    linkify: true,
+    target: "_blank",
+    typographer: true,
+    highlight: function (code, lang) {
+        if (lang && highlight.getLanguage(lang)) {
+            try {
+                return highlight.highlight(lang, code).value;
+            } catch (__) {}
+        }
+
         try {
-            var prot = decodeURIComponent(unescape(href))
-                .replace(/[^\w:]/g, '')
-                .toLowerCase();
-        } catch (e) {
-            return '';
-        }
-        if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0) {
-            return '';
-        }
+            return highlight.highlightAuto(code).value;
+        } catch (__) {}
+
+        return ''; // use external default escaping
     }
-    var out = '<a target="_blank" href="' + href + '"';
-    if (title) {
-        out += ' title="' + title + '"';
-    }
-    out += '>' + text + '</a>';
-    return out;
-};
-marked.setOptions({
-    renderer: renderer,
-    highlight: function (code) {
-        return highlight.highlightAuto(code).value;
-    },
-    sanitize: true
 });
+markdownIt.renderer.rules.paragraph_open = function (tokens, idx /*, options, env */) {
+    return '';
+};
+markdownIt.renderer.rules.paragraph_close = function (tokens, idx /*, options, env */) {
+    if (tokens[idx].tight === true) {
+        return tokens[idx + 1].type.slice(-5) === 'close' ? '' : '\n';
+    }
+    return '\n';
+};
+markdownIt.renderer.rules.link_open = function (tokens, idx /*, options, env */) {
+    var title = tokens[idx].title ? (' title="' + markdownIt.utils.escapeHtml(markdownIt.utils.replaceEntities(tokens[idx].title)) + '"') : '';
+    var target = ' target="_blank"';
+    return '<a href="' + markdownIt.utils.escapeHtml(tokens[idx].href) + '"' + title + target + '>';
+};
 
 var users = [];
 var currentUser;
@@ -141,7 +143,7 @@ exports.respond = function(socket, endpoint, room, redis) {
                         }
 
                         var pm = message.msg.substr(1).split(" ").slice(2).join(" ") || "";
-                        response.msg = marked(pm);
+                        response.msg = markdownIt.render(pm);
                         response.author = {name: socket.request.user.username + " (MP)", md5: md5(socket.request.user.email)};
                         socket.broadcast.to(user.id).emit("message" , response);
                         response.author.name = req.__("To %s", user.name);
@@ -164,7 +166,7 @@ exports.respond = function(socket, endpoint, room, redis) {
                 callback(response);
                 return;
             }
-            message.msg = marked(message.msg);
+            message.msg = markdownIt.render(message.msg);
             message.date = new Date().toISOString();
             message.author = {name: socket.request.user.username, md5: md5(socket.request.user.email)};
             message.notif = true;
