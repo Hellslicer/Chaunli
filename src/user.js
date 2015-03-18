@@ -19,3 +19,13 @@ exports.findById = function(id, callback) {
         callback(new Error("User " + id + " does not exist"));
     }
 };
+
+exports.findByToken = function(token, callback) {
+    for (var i = 0, len = users.length; i < len; i++) {
+        var user = users[i];
+        if (user.token === token) {
+            return callback(null, user);
+        }
+    }
+    return callback(null, null);
+};
