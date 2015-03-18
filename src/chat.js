@@ -2,6 +2,7 @@ var path = require("path")
     , config = require("config")
     , md5 = require("MD5")
     , highlight = require('highlight.js')
+    , iterator = require('markdown-it-for-inline')
     , Utils = require(path.resolve(__dirname, "./utils"))
     , User = require(path.resolve(__dirname, "./user"));
 
@@ -34,11 +35,9 @@ markdownIt.renderer.rules.paragraph_close = function (tokens, idx /*, options, e
     }
     return '\n';
 };
-markdownIt.renderer.rules.link_open = function (tokens, idx /*, options, env */) {
-    var title = tokens[idx].title ? (' title="' + markdownIt.utils.escapeHtml(markdownIt.utils.replaceEntities(tokens[idx].title)) + '"') : '';
-    var target = ' target="_blank"';
-    return '<a href="' + markdownIt.utils.escapeHtml(tokens[idx].href) + '"' + title + target + '>';
-};
+markdownIt.use(iterator, 'url_blank', 'link_open', function (tokens, idx) {
+    tokens[idx].attrPush([ 'target', '_blank' ]);
+});
 
 var users = [];
 var currentUser;
