@@ -163,7 +163,8 @@ exports.respond = function(socket, endpoint, room, redis) {
                     default:
                         response.msg = req.__("Unrecognized command");
                 }
-                callback(response);
+                if (typeof callback != "undefined")
+                    callback(response);
                 return;
             }
             message.msg = markdownIt.render(message.msg);
@@ -173,7 +174,8 @@ exports.respond = function(socket, endpoint, room, redis) {
             socket.broadcast.emit("message", message);
             message.notif = null;
             redis.rpush(endpointName + "-messages", JSON.stringify(message));
-            callback(message);
+            if (typeof callback != "undefined")
+                callback(message);
         }
     }).on("writing", function(data) {
         currentUser = {id: socket.request.user.id, name: socket.request.user.username, md5: md5(socket.request.user.email), roles: socket.request.user.roles};

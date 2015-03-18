@@ -78,7 +78,7 @@ function onAuthorizeSuccess(data, accept){
     i18n.init(data);
     data.user.locale = i18n.getLocale(data);
     data.user.idle = false;
-    console.info(new Date().toLocaleString() + " Successful connection to socket.io (lang: " + data.user.locale + ")");
+    console.info(new Date().toLocaleString() + " Successful connection to socket.io (lang: " + data.user.locale + ", auth: cookie)");
     accept();
 }
 
@@ -89,14 +89,34 @@ function onAuthorizeFail(data, message, error, accept){
     }
 }
 
-io.use(passportSocketIo.authorize({
+var cookieAuth = passportSocketIo.authorize({
     cookieParser: cookieParser,
     key:         "chaunli.sid",
     secret:      config.get("secret_token"),
     store:       sessionStore,
     success:     onAuthorizeSuccess,
     fail:        onAuthorizeFail
-}));
+});
+
+io.use(function(socket, next) {
+    if (socket.request._query && socket.request._query.token) {
+        User.findByToken(socket.request._query.token, function(err, user) {
+            if (err || !user) {
+                return next("Fail");
+            }
+
+            i18n.init(socket.request);
+            socket.request.user = user;
+            socket.request.user.logged_in = true;
+            socket.request.user.locale = i18n.getLocale(socket.request);
+            socket.request.user.idle = false;
+            console.info(new Date().toLocaleString() + " Successful connection to socket.io (lang: " + socket.request.user.locale + ", auth: token)");
+            next();
+        })
+    } else {
+        cookieAuth(socket, next);
+    }
+});
 
 
 
